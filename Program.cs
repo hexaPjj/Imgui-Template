@@ -10,7 +10,11 @@ namespace ImguiAut
         
 
         #region variables
+        int FOV = 90;
+        float FN = 90;
+
         bool AFK = false;
+        bool FK = false;
         #endregion
 
         #region Style
@@ -41,7 +45,7 @@ namespace ImguiAut
             colors[(int)ImGuiCol.FrameBg] = new Vector4(0.12f, 0.12f, 0.15f, 1.00f); // checkbox nonhovered color
             colors[(int)ImGuiCol.FrameBgHovered] = new Vector4(0.20f, 0.20f, 0.25f, 1.00f); //hover
             colors[(int)ImGuiCol.FrameBgActive] = new Vector4(0.30f, 0.30f, 0.35f, 1.00f); //active
-            style.Colors[(int)ImGuiCol.CheckMark] = new System.Numerics.Vector4(1.0f, 1.0f, 1.0f, 1.0f); //check color
+            style.Colors[(int)ImGuiCol.CheckMark] = new System.Numerics.Vector4(0.0f, 0.48f, 1.0f, 1.0f); //check color blue
 
             //title
             colors[(int)ImGuiCol.TitleBg] = new Vector4(0.08f, 0.08f, 0.10f, 1.00f);
@@ -60,12 +64,35 @@ namespace ImguiAut
             ApplyDarkStyle();
             ImGui.Begin("Auto - Design");
 
-            if(ImGui.Button("Exit", new Vector2(70,30)))
-            {
-                Environment.Exit(0);            
-            }
+            ImGui.SeparatorText("Button");
+            ImGui.Button("Button 1", new Vector2(70, 30));
+            ImGui.SameLine();
+            ImGui.Button("Button 2", new Vector2(70, 25));
+            ImGui.SameLine();
+            ImGui.Button("Button 3", new Vector2(70, 20));
 
+            ImGui.SeparatorText("Slider");
+            ImGui.SliderInt("Int Slider", ref FOV, 1, 150);
+            ImGui.SliderFloat("Float Slider", ref FN, 1, 150);
+
+            ImGui.SeparatorText("Inputs");
+            ImGui.InputInt("Hi Int", ref FOV);
+            ImGui.InputFloat("Hi Float", ref FN);
+
+            ImGui.SeparatorText("Text");
+            ImGui.Text("Hello Text");
+
+            ImGui.SeparatorText("Checkbox");
             ImGui.Checkbox("AFK", ref AFK);
+            ImGui.SameLine();
+            ImGui.Checkbox("AFK", ref FK);
+            //SliderInt("Aimbot Smoothing", ref FOV, 1, 150);
+
+            ImGui.SeparatorText("Exit");
+            if(ImGui.Button("Exit",new Vector2(70,25)))
+            {
+                Environment.Exit(0);
+            }
         }
 
         #region main
